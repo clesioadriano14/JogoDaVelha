@@ -2,9 +2,7 @@
 #include <stdio.h> 
 #include <time.h>
 using namespace std;
-                                                // FAZERRR   EMPATEEEEE
-                                                // ERRO: AO ACESSAR A ULTIMA POSICAO ([2][2]) O PROGRAMA TA ENCERRANDO, AO MENOS QUE A JOGADA NESSA >
-                                                // POSICAO CONTABILIZE VITORIA PARA UM DOS JOGADORES
+
 int i,j; 
 char casa[3][3];
 bool fim=false,ganhou=false;
@@ -15,14 +13,14 @@ int JogosEmpatados = 0;
 void ocuptab(){  //                 FUNCAO PARA PREENCHER A MATRIZ COM ESPAÇOS VAZIOS
         for ( i = 0; i < 3; i++)
         {
-            for ( j = 0; j < 3; j++)
+            for ( j = 0; j < 3; j++) 
             {
-                casa[i][j]=' ';
+                casa[i][j]=' '; 
             }
         }
     } 
 
- bool verificafim(){   //            FUNCAO PARA VERIFICAR SE A MATRIZ JA ESTA DEVIDAMENTE PREENCHIDA E SE O JOGO PODE SER ENCERRADO
+ void verificafim(){   //            FUNCAO PARA VERIFICAR SE A MATRIZ JA ESTA DEVIDAMENTE PREENCHIDA E SE O JOGO PODE SER ENCERRADO
      
      for (i = 0; i < 3; i++)
      {
@@ -36,7 +34,7 @@ void ocuptab(){  //                 FUNCAO PARA PREENCHER A MATRIZ COM ESPAÇOS 
                 fim =true;
             }
         }
-    }    
+    }
 }
 
 void mostrartab(){  //            FUNCAO PARA APRESENTAR A TABELA AOS JOGADORES, INICIALMENTE VAZIA, MAS VAI SENDO PREENCHIDA CONFORME AS JOGADAS OCORREM
@@ -118,10 +116,10 @@ int main(int argc, char const *argv[])
             
             do
             {
-                
+                // verifica se é a vez do jogador 1, se for, o jogador irá informar onde deseja jogar
                 if (jogador1ativo)
             {
-                tempo=clock();
+                
                 system("cls");
                 mostrartab();
                 cout<<endl<<"Vez do Jogador 1:(X) "<<endl;
@@ -131,6 +129,7 @@ int main(int argc, char const *argv[])
                 cout<<"informe a coluna: ";
                 cin>>c;
                 c--;
+                // se as condiçoes do if forem atendidas, a posicao que o jogador 1 escolheu receberá "X" e o proximo a jogar será o jogador 2
                 if (casa[l][c]==' ' && (l>=0 && l<3) && (c>=0 && c<3))
                 {
                 casa[l][c]='X';
@@ -139,13 +138,13 @@ int main(int argc, char const *argv[])
                 mostrartab();
                 verificafim();
                 verificawin();
-                
+                // se as condiçoes do if não forem atendidas, a mensagem de erro será exibida e o jogador 1 terá de informar novos valores
                 }else {
                     cout<<endl<<"Posicao ja preenchida ou fora do intervalo"<<endl;
                 }
                 
+                // verifica se é a vez do jogador 2, se for, o jogador irá informar onde deseja jogar
             }else if(jogador2ativo){
-                
                 
                 system("cls");
                 mostrartab();
@@ -156,6 +155,7 @@ int main(int argc, char const *argv[])
                 cout<<"informe a coluna: ";
                 cin>>c;
                 c--;
+                // se as condiçoes do if forem atendidas, a posicao que o jogador 2 escolheu receberá "O" e o proximo a jogar será o jogador 1
                 if (casa[l][c]==' ' && (l>=0 && l<3) && (c>=0 && c<3)) 
                 {
                 casa[l][c]='O';
@@ -164,15 +164,16 @@ int main(int argc, char const *argv[])
                 mostrartab();
                 verificafim();
                 verificawin();
-                
+                // se as condiçoes do if não forem atendidas, a mensagem de erro será exibida e o jogador 2 terá de informar novos valores
                 }else {
                     cout<<endl<<"Posicao ja preenchida ou fora do intervalo"<<endl;
                 }
             }
-            // fim ou ganhou
+            // Ao fim de cada laço é verificado se há ou não um vencedor, ou se o jogo deu "velha"
             } while (ganhou==false);
         }
     }
+            // Aqui o placar é exibido e em seguida é perguntado se desejam jogar novamente ou encerrar o jogo
             cout<<"Placar: "<<endl<<"Jogador 1: "<<VitoriaDoJogador1<<endl<<"Jogador 2: "<<VitoriaDoJogador2<<endl<<"Empates: "<<JogosEmpatados;
             cout<<endl<<"Deseja continuar: (s/n)";
             cin>>aop;
